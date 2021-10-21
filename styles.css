@@ -1,0 +1,156 @@
+/* styles.css */
+
+/* Add styles here to customize the appearance of your app */
+
+:root {
+  --color-1: #e4eef0;
+  --color-2: #bbcfda;
+  --color-3: #6191a8;
+  --color-4: #416275;
+  --color-5: #121f27;
+
+  --tools-height: 60px;
+  --tools-border: 5px;
+}
+
+html {
+  background-color: var(--color-3);
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+main {
+  width: 100%;
+  height: calc(100% - var(--tools-height) - var(--tools-border));
+}
+
+#tools {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: var(--tools-height);
+  background-color: var(--color-2);
+  border-bottom: var(--tools-border) solid var(--color-4);
+}
+
+#tools .tool {
+  margin: 15px;
+}
+
+#quality-input {
+  width: 50px;
+}
+
+#font-size-input {
+  width: 70px;
+}
+
+.hide {
+  display: none !important;
+}
+
+#drop-container {
+  width: 100%;
+  height: 100%;
+  font-size: 5vw;
+  color: var(--color-5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+#canvas-farm {
+  overflow-x: auto;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+  grid-template-rows: auto;
+}
+
+@media screen and (max-width: 2200px) {
+  #canvas-farm {
+    grid-template-columns: 14.2% 14.2% 14.2% 14.2% 14.2% 14.2% 14.2%;
+  }
+}
+
+@media screen and (max-width: 1900px) {
+  #canvas-farm {
+    grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  #canvas-farm {
+    grid-template-columns: 20% 20% 20% 20% 20%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  #canvas-farm {
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #canvas-farm {
+    grid-template-columns: 33% 33% 33%;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  #canvas-farm {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #canvas-farm {
+    grid-template-columns: 100%;
+  }
+}
+
+#canvas-farm .thumb {
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+  height: 200px;
+  background-color: var(--color-5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+@media screen and (max-width: 500px) {
+  #canvas-farm .thumb {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+#canvas-farm .thumb .remove-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 1px dotted var(--color-3);
+  border-style: revert;
+  border-radius: 5px;
+  display: none;
+  font-size: 12px;
+  background: none;
+}
+
+#canvas-farm .thumb:hover .remove-button {
+  display: block;
+}
+
+#canvas-farm .thumb .remove-button:hover {
+  border-style: ridge;
+}
