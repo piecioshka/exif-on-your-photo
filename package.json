@@ -2,7 +2,12 @@
   "name": "exif-on-your-photo",
   "version": "1.0.0",
   "description": "Add EXIF details on your photo! 📸",
-  "main": "main.js",
+  "license": "MIT",
+  "author": {
+    "name": "Piotr Kowalski",
+    "email": "piecioshka@gmail.com",
+    "url": "https://piecioshka.pl/"
+  },
   "scripts": {
     "start": "electron ."
   },
@@ -14,5 +19,9 @@
     "normalize-css": "^2.3.1",
     "number2fraction": "^1.0.2"
   },
-  "repository": "https://github.com/piecioshka/exif-on-your-photo"
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:piecioshka/exif-on-your-photo.git"
+  },
+  "main": "main.js"
 }
