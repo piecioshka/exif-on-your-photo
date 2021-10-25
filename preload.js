@@ -5,29 +5,38 @@ const fs = require("fs").promises;
 const path = require("path");
 const { number2fraction } = require("number2fraction");
 
+const LEFT_OFFSET = 100;
+const BOTTOM_OFFSET = 40;
+
 const IMAGE_QUALITY = 0.5;
 
 const TEXT_COLOR = "#ffffff";
 const FONT_SIZE = 48;
 
-const SUPPORTED_FONTS = [
-  "Cochin", // Default
-  "Baskerville",
-  "Didot",
-  "Optima",
-];
+const SUPPORTED_FONTS = {
+  Cochin: "Cochin", // Default
+  Baskerville: "Baskerville",
+  Didot: "Didot",
+  Optima: "Optima",
+};
+
+const SUPPORTED_DIMENSIONS = {
+  Original: "Original",
+  FullHD: "1920x1280",
+};
 
 const MAX_THUMB_WIDTH = 200;
 const MAX_THUMB_HEIGHT = 200;
 
 const template = (exif) => `
-ISO ${exif.ISO}  ${exif.FocalLength}mm  F/${exif.FNumber}  ${number2fraction(
+${exif.FocalLength}mm  F/${exif.FNumber}  ${number2fraction(
   exif.ExposureTime
-)}s
+)}s  ISO${exif.ISO}
 `;
 
 let fontSize = FONT_SIZE;
-let fontFamily = SUPPORTED_FONTS[0];
+let fontFamily = SUPPORTED_FONTS.Cochin;
+let dimension = SUPPORTED_DIMENSIONS.Original;
 const images = [];
 
 /**
@@ -111,10 +120,33 @@ function createThumbnail($target) {
   return $canvas;
 }
 
+function isHorizontal(width, height) {
+  return width > height;
+}
+
+function getDimensions(img) {
+  switch (dimension) {
+    case SUPPORTED_DIMENSIONS.Original:
+      return { width: img.width, height: img.height };
+    case SUPPORTED_DIMENSIONS.FullHD:
+      if (isHorizontal(img.width, img.height)) {
+        return { width: 1920, height: 1280 };
+      } else {
+        return { width: 1280, height: 1920 };
+      }
+  }
+}
+
+/**
+ * @param {HTMLCanvasElement} canvas
+ * @param {HTMLImageElement} img
+ */
 function fillCanvas(canvas, img) {
   const ctx = canvas.getContext("2d");
-  canvas.width = img.width;
-  canvas.height = img.height;
+  const { width, height } = getDimensions(img);
+  canvas.width = width;
+  canvas.height = height;
+  canvas.getContext("2d").scale(width / img.width, height / img.height);
 
   if (img.width > img.height) {
     canvas.style.width = `${MAX_THUMB_WIDTH}px`;
@@ -131,19 +163,23 @@ function fillCanvas(canvas, img) {
 
 /**
  * @param {HTMLCanvasElement} canvas
+ * @param {HTMLImageElement} img
  * @param {string} text
  * @param {number} x
  * @param {number} y
  */
-function addText(canvas, text, x, y) {
+function addText(canvas, img, text, x, y) {
   const ctx = canvas.getContext("2d");
+  const scale = isHorizontal(img.width, img.height)
+    ? img.width / 1920
+    : img.width / 1280;
   ctx.fillStyle = TEXT_COLOR;
   ctx.shadowOffsetX = 1;
   ctx.shadowOffsetY = 1;
   ctx.shadowBlur = 3;
   ctx.shadowColor = "#000000";
-  ctx.font = `${fontSize}px ${fontFamily}`;
-  ctx.fillText(text, x, y);
+  ctx.font = `${fontSize * scale}px ${fontFamily}`;
+  ctx.fillText(text, x * scale, img.height - y * scale);
 }
 
 function setupImageQuality($input) {
@@ -159,27 +195,28 @@ function setupFontSize($input) {
   });
 }
 
-function setupFontFamilies($select) {
+function setupSelect($select, dict, cb) {
   const fragment = document.createDocumentFragment();
 
-  SUPPORTED_FONTS.forEach((font) => {
+  Object.keys(dict).forEach((key) => {
+    const value = dict[key];
     const $option = document.createElement("option");
-    $option.textContent = font;
-    $option.setAttribute("value", font);
+    $option.textContent = value;
+    $option.setAttribute("value", value);
     fragment.append($option);
   });
 
   $select.append(fragment);
 
   $select.addEventListener("change", () => {
-    fontFamily = $select.value;
+    cb($select.value);
     reloadPhotos();
   });
 }
 
 function createPhotoWithText($canvas, img, text) {
   fillCanvas($canvas, img);
-  addText($canvas, text, 40, img.height - 40);
+  addText($canvas, img, text, LEFT_OFFSET, BOTTOM_OFFSET);
 }
 
 function reloadPhotos() {
@@ -200,12 +237,18 @@ function main() {
   const $resetButton = document.querySelector("#reset-button");
   const $saveButton = document.querySelector("#save-button");
   const $quality = document.querySelector("#quality-input");
-  const $fontFamily = document.querySelector("#font-family");
+  const $fontFamily = document.querySelector("#font-family-select");
   const $fontSize = document.querySelector("#font-size-input");
+  const $dimensions = document.querySelector("#dimensions-select");
 
   setupImageQuality($quality);
   setupFontSize($fontSize);
-  setupFontFamilies($fontFamily);
+  setupSelect($fontFamily, SUPPORTED_FONTS, (selectedValue) => {
+    fontFamily = selectedValue;
+  });
+  setupSelect($dimensions, SUPPORTED_DIMENSIONS, (selectedValue) => {
+    dimension = selectedValue;
+  });
 
   $resetButton.addEventListener("click", () => {
     location.reload();

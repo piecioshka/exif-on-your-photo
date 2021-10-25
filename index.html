@@ -17,7 +17,7 @@
         <button id="reset-button" class="tool">🔄 Reset</button> |
         <button id="save-button" class="tool">💾 Save</button>
         <label class="tool">
-          Quality:
+          <abbr title="Max=1 Min=0">Quality</abbr>:
           <input
             id="quality-input"
             type="number"
@@ -29,16 +29,20 @@
         </label>
         <label class="tool">
           Font:
-          <select id="font-family"></select>
+          <select id="font-family-select"></select>
         </label>
         <label class="tool">
-          Size:
-          <input id="font-size-input" type="number" min="1" value="" />
+          <abbr title="Scaled to 1920x1280">Size</abbr>:
+          <input id="font-size-input" type="number" min="1" max="9999" value="" />
+        </label>
+        <label>
+          Format
+          <select id="dimensions-select"></select>
         </label>
       </div>
     </header>
     <main>
-      <div id="drop-container">Drop photos here</div>
+      <div id="drop-container">Click here to add photos</div>
       <div id="canvas-farm"></div>
       <input
         id="input-label"
