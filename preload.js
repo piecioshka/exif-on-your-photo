@@ -5,7 +5,7 @@ const fs = require("fs").promises;
 const path = require("path");
 const { number2fraction } = require("number2fraction");
 
-const LEFT_OFFSET = 100;
+const LEFT_OFFSET = 120;
 const BOTTOM_OFFSET = 40;
 
 const IMAGE_QUALITY = 0.5;
