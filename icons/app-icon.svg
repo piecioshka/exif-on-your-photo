@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="backdrop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2B3440" />
+      <stop offset="1" stop-color="#0D1218" />
+    </linearGradient>
+    <linearGradient id="blades" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#FFC24A" />
+      <stop offset="0.55" stop-color="#FF8A3D" />
+      <stop offset="1" stop-color="#F2542D" />
+    </linearGradient>
+    <mask id="aperture">
+      <circle cx="512.0" cy="466.0" r="300.0" fill="#fff" />
+      <path d="M 595.14 514.00 L 512.00 562.00 L 428.86 514.00 L 428.86 418.00 L 512.00 370.00 L 595.14 418.00 Z" fill="#000" />
+      <g stroke="#000" stroke-width="30.0" stroke-linecap="butt">
+      <line x1="595.14" y1="514.00" x2="303.94" y2="682.12" />
+      <line x1="512.00" y1="562.00" x2="220.80" y2="393.88" />
+      <line x1="428.86" y1="514.00" x2="428.86" y2="177.75" />
+      <line x1="428.86" y1="418.00" x2="720.06" y2="249.88" />
+      <line x1="512.00" y1="370.00" x2="803.20" y2="538.12" />
+      <line x1="595.14" y1="418.00" x2="595.14" y2="754.25" />
+      </g>
+    </mask>
+  </defs>
+
+  <rect width="1024" height="1024" rx="230" fill="url(#backdrop)" />
+  <rect width="1024" height="1024" rx="230" fill="url(#blades)" mask="url(#aperture)" />
+
+  <g fill="#FFFFFF" opacity="0.92">
+    <rect x="322.00" y="854" width="128.00" height="26" rx="13" />
+    <rect x="474.00" y="854" width="88.00" height="26" rx="13" />
+    <rect x="586.00" y="854" width="150.00" height="26" rx="13" />
+    <rect x="760.00" y="854" width="66.00" height="26" rx="13" />
+  </g>
+</svg>

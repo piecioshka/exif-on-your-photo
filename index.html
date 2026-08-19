@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; img-src 'self' blob:"
+    />
+    <link href="node_modules/normalize.css/normalize.css" rel="stylesheet" />
+    <link href="./styles.css" rel="stylesheet" />
+    <title>EXIF on your photo 📸</title>
+  </head>
+  <body>
+    <header class="toolbar">
+      <div class="toolbar__group">
+        <button id="save-button" class="button button--primary" type="button">
+          Save photos
+        </button>
+        <button id="reset-button" class="button" type="button">Reset</button>
+        <button id="reveal-button" class="button hide" type="button">
+          Show in Finder
+        </button>
+        <p id="save-status" class="status" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="toolbar__group toolbar__group--settings">
+        <label class="field" title="JPEG quality, from 1 to 100 percent">
+          <span class="field__label">Quality</span>
+          <input
+            id="quality-input"
+            class="field__control field__control--narrow"
+            type="number"
+            value=""
+            min="1"
+            max="100"
+            step="5"
+          />
+        </label>
+        <label class="field">
+          <span class="field__label">Font</span>
+          <select
+            id="font-family-select"
+            class="field__control field__control--select"
+          ></select>
+        </label>
+        <label class="field" title="Scaled to 1920x1280">
+          <span class="field__label">Size</span>
+          <input
+            id="font-size-input"
+            class="field__control field__control--narrow"
+            type="number"
+            min="1"
+            max="9999"
+            value=""
+          />
+        </label>
+        <label class="field">
+          <span class="field__label">Format</span>
+          <select
+            id="dimensions-select"
+            class="field__control field__control--select"
+          ></select>
+        </label>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <button id="drop-container" class="dropzone" type="button">
+        <span class="dropzone__title">Click to add photos</span>
+        <span class="dropzone__hint">PNG and JPEG</span>
+      </button>
+      <div id="canvas-farm" class="grid"></div>
+      <input
+        id="input-label"
+        class="hide"
+        type="file"
+        accept=".png,.jpg,.jpeg"
+        multiple
+      />
+    </main>
+
+    <script src="./lib/photo-text.js"></script>
+    <script src="./renderer.js"></script>
+  </body>
+</html>
