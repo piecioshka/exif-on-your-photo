@@ -1,0 +1,53 @@
+appId: pl.piecioshka.exif-on-your-photo
+productName: EXIF on your photo
+copyright: Copyright © Piotr Kowalski
+directories:
+  output: dist
+  buildResources: icons
+files:
+  - index.html
+  - main.js
+  - preload.js
+  - renderer.js
+  - styles.css
+  - lib/**/*
+  - icons/app-icon.png
+  - "!**/*.test.js"
+  - "!**/*.spec.js"
+
+mac:
+  icon: icons/app-icon.png
+  category: public.app-category.photography
+  target:
+    - target: dmg
+      arch: [arm64, x64]
+    - target: zip
+      arch: [arm64, x64]
+  # No Developer ID certificate in this repo, so the build stays unsigned.
+  identity: null
+
+win:
+  icon: icons/app-icon.png
+  target:
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+
+linux:
+  icon: icons/app-icon.png
+  category: Graphics
+  # Lets desktop environments link the running window to its menu entry
+  # (pairs with "desktopName" in package.json).
+  syncDesktopName: true
+  synopsis: Burn EXIF shooting settings onto your photos
+  target:
+    - target: AppImage
+      arch: [x64, arm64]
+    - target: deb
+      arch: [x64, arm64]

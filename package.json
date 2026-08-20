@@ -23,6 +23,10 @@
   },
   "scripts": {
     "start": "electron .",
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux",
+    "build": "electron-builder --mac --win --linux",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
@@ -30,6 +34,7 @@
   },
   "devDependencies": {
     "electron": "^43.4.1",
+    "electron-builder": "^26.15.3",
     "prettier": "^3.9.6",
     "vitest": "^4.1.11"
   },
@@ -41,5 +46,6 @@
     "type": "git",
     "url": "git+https://github.com/piecioshka/exif-on-your-photo.git"
   },
-  "main": "main.js"
+  "main": "main.js",
+  "desktopName": "exif-on-your-photo.desktop"
 }
