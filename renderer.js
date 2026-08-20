@@ -249,6 +249,20 @@ function reloadPhotos() {
   });
 }
 
+/**
+ * Shows which build is running - the first thing worth knowing in a bug report.
+ *
+ * @param {HTMLElement} $version
+ */
+function setupVersion($version) {
+  const version = window.photoApi.version;
+  if (!version) {
+    return;
+  }
+  $version.textContent = `v${version}`;
+  $version.title = `EXIF on your photo ${version}`;
+}
+
 function main() {
   const $input = document.querySelector("#input-label");
   const $canvasFarm = document.querySelector("#canvas-farm");
@@ -261,7 +275,9 @@ function main() {
   const $fontFamily = document.querySelector("#font-family-select");
   const $fontSize = document.querySelector("#font-size-input");
   const $dimensions = document.querySelector("#dimensions-select");
+  const $version = document.querySelector("#app-version");
 
+  setupVersion($version);
   setupImageQuality($quality);
   setupFontSize($fontSize);
   setupSelect($fontFamily, SUPPORTED_FONTS, (selectedValue) => {

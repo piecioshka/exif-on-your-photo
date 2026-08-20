@@ -13,6 +13,9 @@ function createWindow() {
     height: 700,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      // Read once at startup so the renderer can show the version without
+      // waiting on an async round trip.
+      additionalArguments: [`--app-version=${app.getVersion()}`],
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true,

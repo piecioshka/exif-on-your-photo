@@ -4,7 +4,15 @@
 
 const { contextBridge, ipcRenderer, webUtils } = require("electron");
 
+// The main process passes the version in as a switch, so it is available
+// synchronously - no flash of an empty label while an IPC call resolves.
+const versionArgument = process.argv.find((argument) =>
+  argument.startsWith("--app-version="),
+);
+
 contextBridge.exposeInMainWorld("photoApi", {
+  version: versionArgument ? versionArgument.split("=")[1] : "",
+
   /**
    * @param {File} file
    * @returns {Promise<{ focalLength: number | null, fNumber: number | null, exposureTime: string | null, iso: number | null } | null>}
