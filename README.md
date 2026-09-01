@@ -6,6 +6,13 @@
 
 # EXIF on your photo 📸
 
+<!-- prettier-ignore-start -->
+
+[![github-ci](https://github.com/piecioshka/exif-on-your-photo/actions/workflows/ci.yml/badge.svg)](https://github.com/piecioshka/exif-on-your-photo/actions/workflows/ci.yml)
+[![release](https://github.com/piecioshka/exif-on-your-photo/actions/workflows/release.yml/badge.svg)](https://github.com/piecioshka/exif-on-your-photo/actions/workflows/release.yml)
+
+<!-- prettier-ignore-end -->
+
 Burn your camera settings onto the photo, the way film labs used to print them.
 
 ## Preview 🎉
