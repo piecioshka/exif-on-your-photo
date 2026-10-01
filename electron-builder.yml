@@ -1,6 +1,9 @@
 appId: pl.piecioshka.exif-on-your-photo
 productName: EXIF on your photo
 copyright: Copyright © Piotr Kowalski
+# Releases are created by the CI release job from the uploaded artifacts,
+# never by electron-builder itself (it would publish from a tag build).
+publish: null
 directories:
   output: dist
   buildResources: icons
