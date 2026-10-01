@@ -30,14 +30,32 @@ Grab the latest build from the [releases page](https://github.com/piecioshka/exi
 
 | Platform | File                                                                                                                                                                                                                                            |
 | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| macOS    | [Apple silicon](https://github.com/piecioshka/exif-on-your-photo/releases/latest/download/EXIF.on.your.photo-1.0.0-arm64.dmg) · [Intel](https://github.com/piecioshka/exif-on-your-photo/releases/latest/download/EXIF.on.your.photo-1.0.0.dmg) |
-| Windows  | [Installer](https://github.com/piecioshka/exif-on-your-photo/releases/latest/download/EXIF.on.your.photo.Setup.1.0.0.exe) · [Portable](https://github.com/piecioshka/exif-on-your-photo/releases/latest/download/EXIF.on.your.photo.1.0.0.exe)  |
-| Linux    | [AppImage](https://github.com/piecioshka/exif-on-your-photo/releases/latest/download/EXIF.on.your.photo-1.0.0.AppImage) · [deb](https://github.com/piecioshka/exif-on-your-photo/releases/latest/download/exif-on-your-photo_1.0.0_amd64.deb)   |
+| macOS    | [Apple silicon](https://github.com/piecioshka/exif-on-your-photo/releases/latest/download/EXIF.on.your.photo-1.0.1-arm64.dmg) · [Intel](https://github.com/piecioshka/exif-on-your-photo/releases/latest/download/EXIF.on.your.photo-1.0.1.dmg) |
+| Windows  | [Installer](https://github.com/piecioshka/exif-on-your-photo/releases/latest/download/EXIF.on.your.photo.Setup.1.0.1.exe) · [Portable](https://github.com/piecioshka/exif-on-your-photo/releases/latest/download/EXIF.on.your.photo.1.0.1.exe)  |
+| Linux    | [AppImage](https://github.com/piecioshka/exif-on-your-photo/releases/latest/download/EXIF.on.your.photo-1.0.1.AppImage) · [deb](https://github.com/piecioshka/exif-on-your-photo/releases/latest/download/exif-on-your-photo_1.0.1_amd64.deb)   |
 
 > [!NOTE]
-> The builds are not code signed. macOS will refuse the first launch, so open
-> the app from the context menu once ("Open" instead of a double click), and
-> Windows will show a SmartScreen warning behind "More info".
+> The builds are not signed with a paid certificate. macOS needs one extra step
+> on the first launch (see below), and Windows shows a SmartScreen warning,
+> where "More info" reveals the "Run anyway" button.
+
+### Opening on macOS
+
+The macOS build is not notarized by Apple, so the first launch is blocked with a
+message that the app cannot be verified. To open it once:
+
+1. Try to open the app, then close the warning.
+2. Open System Settings > Privacy & Security, scroll to Security and click
+   **Open Anyway** next to EXIF on your photo.
+3. Confirm with **Open**.
+
+Or, from the Terminal, after moving the app to Applications:
+
+```bash
+xattr -dr com.apple.quarantine "/Applications/EXIF on your photo.app"
+```
+
+macOS remembers the choice, so later launches start normally.
 
 ## Features
 
