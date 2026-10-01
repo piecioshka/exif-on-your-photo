@@ -1,6 +1,6 @@
 {
   "name": "exif-on-your-photo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Add EXIF details on your photo! 📸",
   "keywords": [
