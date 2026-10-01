@@ -92,8 +92,30 @@ npm run build:win
 npm run build:linux
 ```
 
-Pushing a `v*` tag builds all three on their own runners and attaches the
-installers to a GitHub release.
+## CI
+
+GitHub Actions workflow `.github/workflows/ci.yml` checks formatting and runs
+the tests on every push and pull request.
+
+`.github/workflows/release.yml` builds the installers on native runners and
+verifies the macOS ad-hoc signature. Started by hand from the Actions tab, it
+only uploads the installers as workflow artifacts:
+
+- `macos-latest` -> `npm run build:mac`
+- `windows-latest` -> `npm run build:win`
+- `ubuntu-latest` -> `npm run build:linux`
+
+## Release
+
+```bash
+npm version patch
+git push --follow-tags
+```
+
+`npm version` bumps `package.json` and creates the `vX.Y.Z` tag. A pushed tag
+runs the release workflow: the `release` job checks that the tag matches the
+`package.json` version and publishes the installers from all three platforms
+as a GitHub release.
 
 ## License
 
