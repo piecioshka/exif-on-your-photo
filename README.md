@@ -66,7 +66,7 @@ macOS remembers the choice, so later launches start normally.
 - 🗂️ Takes a whole batch at once, every photo with its own preview
 - 💾 Writes to a `WITH_EXIF` directory next to the originals, which stay untouched
 - 🔌 Works entirely offline - nothing is uploaded, no account, no telemetry
-- 🛡️ Sandboxed renderer with no access to Node.js (Electron 43)
+- 🛡️ Sandboxed renderer with no access to Node.js (Electron 44)
 
 ## Requirements
 
