@@ -8,6 +8,6 @@ npm-debug.log*
 !.env.example
 
 tmp/*
-!tmp/.gitkeep
+tmp/
 
 dist/
