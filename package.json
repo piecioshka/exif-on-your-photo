@@ -30,11 +30,14 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "ci": "npm run format:check && npm test",
+    "prepare": "husky"
   },
   "devDependencies": {
     "electron": "^44.5.1",
     "electron-builder": "^26.15.3",
+    "husky": "^9.1.7",
     "prettier": "^3.9.6",
     "vitest": "^4.1.11"
   },
